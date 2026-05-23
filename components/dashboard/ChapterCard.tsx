@@ -19,15 +19,14 @@ export function ChapterCard({ chapter, completed, total }: Props) {
     <Link
       href={`/chapter/${chapter.id}`}
       className={cn(
-        "group flex flex-col gap-3 rounded-xl border p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg shadow-sm",
-        colors.border,
-        "bg-white hover:bg-gray-50"
+        "group flex flex-col gap-3 rounded-xl border p-5 transition-all hover:-translate-y-0.5 hover:shadow-md shadow-sm bg-white",
+        isDone ? "border-green-200" : "border-blue-100 hover:border-blue-200"
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <div
           className={cn(
-            "flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold",
+            "flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold",
             colors.bg,
             colors.text
           )}
@@ -35,20 +34,20 @@ export function ChapterCard({ chapter, completed, total }: Props) {
           {chapter.id}
         </div>
         {isDone && (
-          <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
+          <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0" />
         )}
       </div>
 
       <div className="flex-1">
-        <h3 className="font-semibold text-gray-900 leading-tight">
+        <h3 className="font-semibold text-slate-800 leading-tight">
           {chapter.title}
         </h3>
-        <p className="mt-1 text-xs text-gray-500 line-clamp-2">
+        <p className="mt-1 text-xs text-slate-500 line-clamp-2">
           {chapter.description}
         </p>
       </div>
 
-      <div className="flex items-center justify-between text-xs text-gray-500">
+      <div className="flex items-center justify-between text-xs text-slate-500">
         <span className="flex items-center gap-1">
           <Clock className="h-3 w-3" /> {chapter.duration} min
         </span>
@@ -57,11 +56,11 @@ export function ChapterCard({ chapter, completed, total }: Props) {
         </span>
       </div>
 
-      <div className="relative h-1.5 w-full rounded-full bg-gray-200">
+      <div className="relative h-1.5 w-full rounded-full bg-blue-100">
         <div
           className={cn(
             "absolute h-full rounded-full transition-all duration-500",
-            `bg-${chapter.color}-500`
+            isDone ? "bg-green-500" : `bg-${chapter.color}-500`
           )}
           style={{ width: `${pct}%` }}
         />

@@ -34,12 +34,12 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
   if (done) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-6">
-        <p className="text-sm text-green-700 font-medium mb-3">
+        <p className="text-sm text-green-700 font-semibold mb-3">
           Red-teaming exercise complete!
         </p>
         <button
           onClick={onComplete}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+          className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
         >
           Continue
         </button>
@@ -48,36 +48,39 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
+    <div className="rounded-xl border border-blue-100 bg-white shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
-          Red-Teaming Exercise
-        </h3>
-        <span className="text-xs text-gray-500">
+        <div className="flex items-center gap-2">
+          <span className="h-5 w-1 rounded-full bg-orange-500 shrink-0" />
+          <h3 className="text-xs font-bold uppercase tracking-widest text-orange-600">
+            Red-Teaming Exercise
+          </h3>
+        </div>
+        <span className="text-xs text-slate-500 font-medium bg-orange-50 px-2 py-0.5 rounded-full">
           {current + 1} / {scenarios.length}
         </span>
       </div>
 
-      <div className="rounded-lg border border-orange-300 bg-orange-50 p-4 mb-4">
-        <div className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-1">
+      <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 mb-4">
+        <div className="text-xs font-bold text-orange-600 uppercase tracking-wide mb-1.5">
           Prompt
         </div>
-        <p className="text-sm text-gray-800 leading-relaxed">{scenario.prompt}</p>
+        <p className="text-sm text-slate-800 leading-relaxed">{scenario.prompt}</p>
       </div>
 
       {revealed && (
         <div className="space-y-3 mb-4">
           <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-            <div className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-1">
+            <div className="text-xs font-bold text-red-600 uppercase tracking-wide mb-1.5">
               Risk
             </div>
-            <p className="text-sm text-gray-700">{scenario.risk}</p>
+            <p className="text-sm text-slate-700">{scenario.risk}</p>
           </div>
-          <div className="rounded-lg border border-gray-200 bg-gray-100 p-3">
-            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide mr-2">
+          <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wide mr-2">
               Category:
             </span>
-            <span className="text-xs text-blue-600">{scenario.category}</span>
+            <span className="text-xs text-blue-700 font-medium">{scenario.category}</span>
           </div>
         </div>
       )}
@@ -86,7 +89,7 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
         {!revealed && (
           <button
             onClick={() => setRevealed(true)}
-            className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            className="rounded-lg border border-orange-200 bg-orange-50 px-5 py-2.5 text-sm font-semibold text-orange-700 hover:bg-orange-100 transition-colors"
           >
             Reveal Risk
           </button>
@@ -94,7 +97,7 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
         {revealed && (
           <button
             onClick={next}
-            className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
           >
             {current + 1 < scenarios.length ? "Next Scenario" : "Finish"}
             <ChevronRight className="h-4 w-4" />

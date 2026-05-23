@@ -55,13 +55,13 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
     selected.every((s) => correctAnswers.includes(s));
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
+    <div className="rounded-xl border border-blue-100 bg-white shadow-sm p-6">
       <div className="flex items-center gap-2 mb-4">
-        <span className="rounded bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
+        <span className="rounded-md bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">
           {isMulti ? "Select TWO" : "Quick Check"}
         </span>
       </div>
-      <p className="text-gray-800 text-sm leading-relaxed mb-4">
+      <p className="text-slate-800 leading-relaxed mb-4">
         {quiz.question}
       </p>
       <div className="flex flex-col gap-2 mb-4">
@@ -74,34 +74,34 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
               className={cn(
                 "flex items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all",
                 state === "idle" &&
-                  "border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50",
+                  "border-blue-100 text-slate-700 hover:border-blue-300 hover:bg-blue-50",
                 state === "selected" &&
-                  "border-blue-500 bg-blue-50 text-gray-800",
+                  "border-blue-500 bg-blue-50 text-slate-800",
                 state === "correct" &&
-                  "border-green-500 bg-green-50 text-green-700",
+                  "border-green-400 bg-green-50 text-green-800",
                 state === "wrong" &&
-                  "border-red-500 bg-red-50 text-red-700"
+                  "border-red-400 bg-red-50 text-red-800"
               )}
             >
               <span
                 className={cn(
-                  "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold",
-                  state === "idle" && "border-gray-300",
+                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold",
+                  state === "idle" && "border-blue-200 text-slate-500",
                   state === "selected" &&
-                    "border-blue-400 bg-blue-400 text-white",
+                    "border-blue-500 bg-blue-500 text-white",
                   state === "correct" &&
-                    "border-green-400 bg-green-400 text-white",
-                  state === "wrong" && "border-red-400 bg-red-400 text-white"
+                    "border-green-500 bg-green-500 text-white",
+                  state === "wrong" && "border-red-500 bg-red-500 text-white"
                 )}
               >
                 {String.fromCharCode(65 + idx)}
               </span>
               <span className="leading-relaxed">{opt}</span>
               {state === "correct" && (
-                <CheckCircle2 className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-green-600" />
+                <CheckCircle2 className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-green-500" />
               )}
               {state === "wrong" && (
-                <XCircle className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-red-600" />
+                <XCircle className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-red-500" />
               )}
             </button>
           );
@@ -112,7 +112,7 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
         <button
           onClick={submit}
           disabled={selected.length === 0}
-          className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           Check Answer <ChevronRight className="h-4 w-4" />
         </button>
@@ -125,10 +125,10 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
               : "bg-orange-50 border border-orange-200 text-orange-800"
           )}
         >
-          <p className="font-medium mb-1">
-            {allCorrect ? "Correct!" : "Not quite"}
+          <p className="font-semibold mb-1">
+            {allCorrect ? "✓ Correct!" : "✗ Not quite"}
           </p>
-          <p className="text-gray-600 text-xs leading-relaxed">
+          <p className="text-slate-600 text-xs leading-relaxed">
             {quiz.explanation}
           </p>
         </div>

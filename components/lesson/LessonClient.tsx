@@ -59,33 +59,42 @@ export function LessonClient({
 
   const steps = ["concept", "quiz", ...(hasExercise ? ["exercise"] : [])];
 
-  // Suppress unused variable warning
   void prevLo;
+
+  const stepLabels: Record<string, string> = {
+    concept: "Read",
+    quiz: "Check",
+    exercise: "Practice",
+  };
 
   return (
     <div className="flex flex-col gap-6">
       {/* Step indicator */}
       {step !== "complete" && (
-        <div className="flex items-center gap-2 text-xs text-gray-500">
+        <div className="flex items-center gap-2">
           {steps.map((s, i) => (
             <div key={s} className="flex items-center gap-2">
-              {i > 0 && <span className="text-gray-300">→</span>}
+              {i > 0 && (
+                <ChevronRight className="h-3.5 w-3.5 text-blue-300" />
+              )}
               <span
                 className={cn(
-                  "rounded px-2 py-0.5 font-medium",
+                  "rounded-full px-3 py-1 text-xs font-semibold transition-colors",
                   step === s
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-gray-400"
+                    ? "bg-blue-600 text-white"
+                    : steps.indexOf(step) > i
+                    ? "bg-green-100 text-green-700"
+                    : "bg-blue-50 text-blue-400"
                 )}
               >
-                {s.charAt(0).toUpperCase() + s.slice(1)}
+                {stepLabels[s] ?? s}
               </span>
             </div>
           ))}
         </div>
       )}
 
-      {/* Concept card — always shown once reached */}
+      {/* Concept card */}
       {(step === "concept" ||
         step === "quiz" ||
         step === "exercise" ||
@@ -99,7 +108,7 @@ export function LessonClient({
       {step === "concept" && (
         <button
           onClick={() => setStep("quiz")}
-          className="self-start flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+          className="self-start flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm"
         >
           Take Quick Check <ChevronRight className="h-4 w-4" />
         </button>
@@ -121,13 +130,15 @@ export function LessonClient({
       {/* Complete */}
       {step === "complete" && (
         <div className="rounded-xl border border-green-200 bg-green-50 p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <CheckCircle2 className="h-6 w-6 text-green-600" />
+          <div className="flex items-center gap-3 mb-5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+              <CheckCircle2 className="h-6 w-6 text-green-600" />
+            </div>
             <div>
-              <h3 className="font-semibold text-green-700">
+              <h3 className="font-bold text-green-800 text-base">
                 Lesson Complete!
               </h3>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-500 mt-0.5">
                 {quizCorrect === true
                   ? "Quiz answered correctly"
                   : quizCorrect === false
@@ -141,7 +152,7 @@ export function LessonClient({
             {nextLo && (
               <Link
                 href={`/chapter/${chapterId}/lesson/${nextLo}`}
-                className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
               >
                 Next Lesson <ArrowRight className="h-4 w-4" />
               </Link>
@@ -149,7 +160,7 @@ export function LessonClient({
             {!nextLo && nextChapterId && (
               <Link
                 href={`/chapter/${nextChapterId}`}
-                className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
               >
                 Chapter {nextChapterId} <ArrowRight className="h-4 w-4" />
               </Link>
@@ -157,14 +168,14 @@ export function LessonClient({
             {!nextLo && !nextChapterId && (
               <Link
                 href="/exam"
-                className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+                className="flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-700 transition-colors"
               >
                 Take Mock Exam <ArrowRight className="h-4 w-4" />
               </Link>
             )}
             <Link
               href={`/chapter/${chapterId}`}
-              className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              className="rounded-lg border border-blue-200 bg-white px-5 py-2.5 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition-colors"
             >
               Back to Chapter
             </Link>

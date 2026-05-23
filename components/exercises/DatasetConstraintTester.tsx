@@ -20,11 +20,14 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
   const passCount = constraints.filter((c) => c.passes).length;
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">
-        Dataset Constraint Tester
-      </h3>
-      <p className="text-sm text-gray-600 mb-4">
+    <div className="rounded-xl border border-blue-100 bg-white shadow-sm p-6">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="h-5 w-1 rounded-full bg-blue-500 shrink-0" />
+        <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600">
+          Dataset Constraint Tester
+        </h3>
+      </div>
+      <p className="text-sm text-slate-600 mb-4">
         Review each dataset constraint and check results.
       </p>
 
@@ -34,19 +37,19 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
             key={i}
             className={cn(
               "flex items-start gap-3 rounded-lg border p-3 text-sm",
-              !checked && "border-gray-200 text-gray-700",
-              checked && c.passes && "border-green-200 bg-green-50 text-green-700",
-              checked && !c.passes && "border-red-200 bg-red-50 text-red-700"
+              !checked && "border-blue-100 text-slate-700 bg-white",
+              checked && c.passes && "border-green-200 bg-green-50 text-green-800",
+              checked && !c.passes && "border-red-200 bg-red-50 text-red-800"
             )}
           >
             {checked ? (
               c.passes ? (
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
               ) : (
-                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
               )
             ) : (
-              <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-gray-300" />
+              <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-blue-200" />
             )}
             <span>{c.description}</span>
           </div>
@@ -54,7 +57,7 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
       </div>
 
       {checked && (
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm font-medium text-slate-600 mb-4">
           {passCount} / {constraints.length} constraints passed.
         </p>
       )}
@@ -63,7 +66,7 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
         {!checked && (
           <button
             onClick={() => setChecked(true)}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+            className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
           >
             Run Checks
           </button>
@@ -71,7 +74,7 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
         {checked && (
           <button
             onClick={onComplete}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+            className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
           >
             Mark Complete
           </button>

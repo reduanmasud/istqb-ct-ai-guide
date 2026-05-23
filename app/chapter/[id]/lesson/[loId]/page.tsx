@@ -43,15 +43,16 @@ export default async function LessonPage({
     <>
       <Header />
       <main className="mx-auto max-w-3xl px-4 py-8">
+        {/* Breadcrumb */}
         <div className="flex items-center gap-2 mb-6">
           <Link
             href={`/chapter/${id}`}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800"
+            className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Ch {id}
           </Link>
-          <span className="text-gray-300">/</span>
-          <span className={cn("text-sm font-medium", colors.text)}>
+          <span className="text-blue-200">/</span>
+          <span className={cn("text-sm font-medium truncate max-w-[24ch]", colors.text)}>
             {lesson.title}
           </span>
         </div>
@@ -66,11 +67,11 @@ export default async function LessonPage({
           >
             {lesson.kLevel}
           </span>
-          <span className="text-xs font-mono text-gray-500">
+          <span className="text-xs font-mono text-slate-400">
             {loId.toUpperCase()}
           </span>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-8">
+        <h1 className="text-2xl font-bold text-slate-900 mb-8">
           {lesson.title}
         </h1>
 
