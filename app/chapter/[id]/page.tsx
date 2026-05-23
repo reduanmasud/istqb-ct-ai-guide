@@ -38,7 +38,7 @@ export default async function ChapterPage({
       <main className="mx-auto max-w-3xl px-4 py-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-slate-200 mb-6"
+          className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 mb-6"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Dashboard
         </Link>
@@ -52,9 +52,9 @@ export default async function ChapterPage({
         >
           Chapter {chapter.id}
         </div>
-        <h1 className="text-2xl font-bold text-slate-100">{chapter.title}</h1>
-        <p className="mt-2 text-slate-400 mb-2">{chapter.description}</p>
-        <div className="flex items-center gap-4 text-sm text-slate-500 mb-8">
+        <h1 className="text-2xl font-bold text-gray-900">{chapter.title}</h1>
+        <p className="mt-2 text-gray-500 mb-2">{chapter.description}</p>
+        <div className="flex items-center gap-4 text-sm text-gray-500 mb-8">
           <span className="flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" /> {chapter.duration} min
           </span>

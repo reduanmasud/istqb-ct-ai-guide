@@ -46,11 +46,11 @@ export default async function LessonPage({
         <div className="flex items-center gap-2 mb-6">
           <Link
             href={`/chapter/${id}`}
-            className="flex items-center gap-1 text-sm text-slate-400 hover:text-slate-200"
+            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Ch {id}
           </Link>
-          <span className="text-slate-700">/</span>
+          <span className="text-gray-300">/</span>
           <span className={cn("text-sm font-medium", colors.text)}>
             {lesson.title}
           </span>
@@ -66,11 +66,11 @@ export default async function LessonPage({
           >
             {lesson.kLevel}
           </span>
-          <span className="text-xs font-mono text-slate-500">
+          <span className="text-xs font-mono text-gray-500">
             {loId.toUpperCase()}
           </span>
         </div>
-        <h1 className="text-2xl font-bold text-slate-100 mb-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-8">
           {lesson.title}
         </h1>
 

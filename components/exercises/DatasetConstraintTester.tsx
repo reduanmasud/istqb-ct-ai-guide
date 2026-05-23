@@ -20,11 +20,11 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
   const passCount = constraints.filter((c) => c.passes).length;
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">
         Dataset Constraint Tester
       </h3>
-      <p className="text-sm text-slate-400 mb-4">
+      <p className="text-sm text-gray-600 mb-4">
         Review each dataset constraint and check results.
       </p>
 
@@ -34,19 +34,19 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
             key={i}
             className={cn(
               "flex items-start gap-3 rounded-lg border p-3 text-sm",
-              !checked && "border-slate-700 text-slate-300",
-              checked && c.passes && "border-green-500/30 bg-green-500/5 text-green-300",
-              checked && !c.passes && "border-red-500/30 bg-red-500/5 text-red-300"
+              !checked && "border-gray-200 text-gray-700",
+              checked && c.passes && "border-green-200 bg-green-50 text-green-700",
+              checked && !c.passes && "border-red-200 bg-red-50 text-red-700"
             )}
           >
             {checked ? (
               c.passes ? (
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
               ) : (
-                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
               )
             ) : (
-              <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-slate-600" />
+              <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-gray-300" />
             )}
             <span>{c.description}</span>
           </div>
@@ -54,7 +54,7 @@ export function DatasetConstraintTester({ data, onComplete }: Props) {
       </div>
 
       {checked && (
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           {passCount} / {constraints.length} constraints passed.
         </p>
       )}

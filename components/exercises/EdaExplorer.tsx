@@ -19,8 +19,8 @@ export function EdaExplorer({ data, onComplete }: Props) {
 
   if (done || steps.length === 0) {
     return (
-      <div className="rounded-xl border border-green-500/30 bg-green-500/5 p-6">
-        <p className="text-sm text-green-300 font-medium mb-3">
+      <div className="rounded-xl border border-green-200 bg-green-50 p-6">
+        <p className="text-sm text-green-700 font-medium mb-3">
           EDA exploration complete!
         </p>
         <button
@@ -36,21 +36,21 @@ export function EdaExplorer({ data, onComplete }: Props) {
   const step = steps[current];
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
           EDA Explorer
         </h3>
-        <span className="text-xs text-slate-500">
+        <span className="text-xs text-gray-500">
           Step {current + 1} / {steps.length}
         </span>
       </div>
 
-      <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4 mb-6">
-        <div className="text-sm font-semibold text-blue-300 mb-2">
+      <div className="rounded-lg border border-gray-200 bg-gray-100 p-4 mb-6">
+        <div className="text-sm font-semibold text-blue-600 mb-2">
           {step.label}
         </div>
-        <p className="text-sm text-slate-300 leading-relaxed">
+        <p className="text-sm text-gray-700 leading-relaxed">
           {step.description}
         </p>
       </div>

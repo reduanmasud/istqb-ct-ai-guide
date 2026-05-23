@@ -55,13 +55,13 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
     selected.every((s) => correctAnswers.includes(s));
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
       <div className="flex items-center gap-2 mb-4">
-        <span className="rounded bg-blue-500/20 px-2 py-0.5 text-xs font-semibold text-blue-300">
+        <span className="rounded bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
           {isMulti ? "Select TWO" : "Quick Check"}
         </span>
       </div>
-      <p className="text-slate-200 text-sm leading-relaxed mb-4">
+      <p className="text-gray-800 text-sm leading-relaxed mb-4">
         {quiz.question}
       </p>
       <div className="flex flex-col gap-2 mb-4">
@@ -74,19 +74,19 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
               className={cn(
                 "flex items-start gap-3 rounded-lg border p-3 text-left text-sm transition-all",
                 state === "idle" &&
-                  "border-slate-700 text-slate-300 hover:border-slate-600 hover:bg-slate-800/50",
+                  "border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50",
                 state === "selected" &&
-                  "border-blue-500 bg-blue-500/10 text-slate-200",
+                  "border-blue-500 bg-blue-50 text-gray-800",
                 state === "correct" &&
-                  "border-green-500 bg-green-500/10 text-green-300",
+                  "border-green-500 bg-green-50 text-green-700",
                 state === "wrong" &&
-                  "border-red-500 bg-red-500/10 text-red-300"
+                  "border-red-500 bg-red-50 text-red-700"
               )}
             >
               <span
                 className={cn(
                   "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold",
-                  state === "idle" && "border-slate-600",
+                  state === "idle" && "border-gray-300",
                   state === "selected" &&
                     "border-blue-400 bg-blue-400 text-white",
                   state === "correct" &&
@@ -98,10 +98,10 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
               </span>
               <span className="leading-relaxed">{opt}</span>
               {state === "correct" && (
-                <CheckCircle2 className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                <CheckCircle2 className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-green-600" />
               )}
               {state === "wrong" && (
-                <XCircle className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                <XCircle className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-red-600" />
               )}
             </button>
           );
@@ -121,14 +121,14 @@ export function QuizQuestion({ quiz, onComplete }: Props) {
           className={cn(
             "rounded-lg p-4 text-sm",
             allCorrect
-              ? "bg-green-500/10 border border-green-500/30 text-green-300"
-              : "bg-orange-500/10 border border-orange-500/30 text-orange-300"
+              ? "bg-green-50 border border-green-200 text-green-800"
+              : "bg-orange-50 border border-orange-200 text-orange-800"
           )}
         >
           <p className="font-medium mb-1">
             {allCorrect ? "Correct!" : "Not quite"}
           </p>
-          <p className="text-slate-400 text-xs leading-relaxed">
+          <p className="text-gray-600 text-xs leading-relaxed">
             {quiz.explanation}
           </p>
         </div>

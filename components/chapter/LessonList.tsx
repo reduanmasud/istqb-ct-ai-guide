@@ -12,13 +12,13 @@ interface LessonMeta {
 }
 
 const kLevelColor: Record<string, string> = {
-  K1: "bg-slate-700 text-slate-300",
-  K2: "bg-blue-500/20 text-blue-300",
-  K3: "bg-orange-500/20 text-orange-300",
-  K4: "bg-red-500/20 text-red-300",
-  H0: "bg-gray-500/20 text-gray-300",
-  H1: "bg-green-500/20 text-green-300",
-  H2: "bg-emerald-500/20 text-emerald-300",
+  K1: "bg-gray-100 text-gray-700",
+  K2: "bg-blue-50 text-blue-700",
+  K3: "bg-orange-50 text-orange-700",
+  K4: "bg-red-50 text-red-700",
+  H0: "bg-gray-100 text-gray-600",
+  H1: "bg-green-50 text-green-700",
+  H2: "bg-emerald-50 text-emerald-700",
 };
 
 export function LessonList({
@@ -47,15 +47,15 @@ export function LessonList({
             className={cn(
               "flex items-center gap-4 rounded-xl border p-4 transition-all",
               isDone
-                ? "border-green-500/30 bg-green-500/5 hover:bg-green-500/10"
-                : "border-slate-800 bg-slate-900/60 hover:bg-slate-900"
+                ? "border-green-200 bg-green-50 hover:bg-green-100"
+                : "border-gray-200 bg-white hover:bg-gray-50"
             )}
           >
             <div className="shrink-0">
               {isDone ? (
-                <CheckCircle2 className="h-5 w-5 text-green-400" />
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
               ) : (
-                <Circle className="h-5 w-5 text-slate-600" />
+                <Circle className="h-5 w-5 text-gray-400" />
               )}
             </div>
 
@@ -69,16 +69,16 @@ export function LessonList({
                 >
                   {lesson.kLevel}
                 </span>
-                <span className="text-xs text-slate-500 font-mono">
+                <span className="text-xs text-gray-500 font-mono">
                   {lesson.id.toUpperCase()}
                 </span>
               </div>
-              <span className="text-sm text-slate-200 leading-snug">
+              <span className="text-sm text-gray-800 leading-snug">
                 {lesson.title}
               </span>
             </div>
 
-            <ChevronRight className="h-4 w-4 text-slate-600 shrink-0" />
+            <ChevronRight className="h-4 w-4 text-gray-400 shrink-0" />
           </Link>
         );
       })}

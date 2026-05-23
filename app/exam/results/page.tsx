@@ -39,9 +39,9 @@ export default function ExamResultsPage() {
       <>
         <Header />
         <main className="mx-auto max-w-3xl px-4 py-8 text-center">
-          <p className="text-slate-400">
+          <p className="text-gray-500">
             No exam results found.{" "}
-            <Link href="/exam" className="text-blue-400 underline">
+            <Link href="/exam" className="text-blue-600 underline">
               Take the exam
             </Link>
             .
@@ -85,45 +85,45 @@ export default function ExamResultsPage() {
           className={cn(
             "rounded-xl border p-8 text-center mb-8",
             passed
-              ? "border-green-500/40 bg-green-500/5"
-              : "border-red-500/40 bg-red-500/5"
+              ? "border-green-200 bg-green-50"
+              : "border-red-200 bg-red-50"
           )}
         >
           {passed ? (
-            <Trophy className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
+            <Trophy className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
           ) : (
-            <XCircle className="h-12 w-12 text-red-400 mx-auto mb-4" />
+            <XCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
           )}
           <h1
             className={cn(
               "text-4xl font-bold mb-1",
-              passed ? "text-green-400" : "text-red-400"
+              passed ? "text-green-600" : "text-red-600"
             )}
           >
             {pct}%
           </h1>
-          <p className="text-slate-400 mb-2">
+          <p className="text-gray-500 mb-2">
             {attempt.score}/{attempt.maxScore} points
           </p>
           <p
             className={cn(
               "text-lg font-semibold mb-4",
-              passed ? "text-green-300" : "text-slate-300"
+              passed ? "text-green-700" : "text-gray-700"
             )}
           >
             {passed
               ? "🎉 PASS — You met the 65% threshold!"
               : "❌ Not quite — keep studying!"}
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-gray-500">
             Time: {timeMin}m {timeSec}s ·{" "}
             {new Date(attempt.date).toLocaleDateString()}
           </p>
         </div>
 
         {/* Chapter breakdown */}
-        <h2 className="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">
-          <BarChart2 className="h-5 w-5 text-blue-400" /> Chapter Breakdown
+        <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <BarChart2 className="h-5 w-5 text-blue-600" /> Chapter Breakdown
         </h2>
         <div className="flex flex-col gap-3 mb-8">
           {chapterStats.map(
@@ -131,27 +131,27 @@ export default function ExamResultsPage() {
               total > 0 && (
                 <div
                   key={chapter.id}
-                  className="rounded-xl border border-slate-800 bg-slate-900/60 p-4"
+                  className="rounded-xl border border-gray-200 bg-white shadow-sm p-4"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div>
-                      <span className="text-xs font-mono text-slate-500">
+                      <span className="text-xs font-mono text-gray-500">
                         Ch {chapter.id}
                       </span>
-                      <span className="ml-2 text-sm text-slate-200">
+                      <span className="ml-2 text-sm text-gray-800">
                         {chapter.title}
                       </span>
                     </div>
                     <span
                       className={cn(
                         "text-sm font-bold",
-                        cPct >= 65 ? "text-green-400" : "text-red-400"
+                        cPct >= 65 ? "text-green-600" : "text-red-600"
                       )}
                     >
                       {correct}/{total} ({cPct}%)
                     </span>
                   </div>
-                  <div className="h-1.5 w-full rounded-full bg-slate-800">
+                  <div className="h-1.5 w-full rounded-full bg-gray-200">
                     <div
                       className={cn(
                         "h-full rounded-full transition-all",
@@ -163,7 +163,7 @@ export default function ExamResultsPage() {
                   {cPct < 65 && (
                     <Link
                       href={`/chapter/${chapter.id}`}
-                      className="mt-2 inline-flex items-center gap-1 text-xs text-blue-400 hover:underline"
+                      className="mt-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"
                     >
                       <BookOpen className="h-3 w-3" /> Review this chapter
                     </Link>
@@ -174,7 +174,7 @@ export default function ExamResultsPage() {
         </div>
 
         {/* Question review */}
-        <h2 className="text-lg font-semibold text-slate-200 mb-4">
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Question Review
         </h2>
         <div className="flex flex-col gap-3 mb-8">
@@ -199,36 +199,36 @@ export default function ExamResultsPage() {
                 className={cn(
                   "rounded-xl border p-4 text-sm",
                   isCorrect
-                    ? "border-green-500/20 bg-green-500/5"
-                    : "border-red-500/20 bg-red-500/5"
+                    ? "border-green-200 bg-green-50"
+                    : "border-red-200 bg-red-50"
                 )}
               >
                 <div className="flex items-start gap-3">
                   {isCorrect ? (
-                    <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-green-400" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-green-600" />
                   ) : (
-                    <XCircle className="h-4 w-4 shrink-0 mt-0.5 text-red-400" />
+                    <XCircle className="h-4 w-4 shrink-0 mt-0.5 text-red-600" />
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="text-xs font-mono text-slate-500">
+                      <span className="text-xs font-mono text-gray-500">
                         Q{q.id}
                       </span>
-                      <span className="text-xs text-slate-500">
+                      <span className="text-xs text-gray-500">
                         {q.loRef} · Ch{q.chapter}
                       </span>
                       {skipped && (
-                        <span className="rounded bg-yellow-500/20 px-1.5 py-0.5 text-[10px] text-yellow-300">
+                        <span className="rounded bg-yellow-50 px-1.5 py-0.5 text-[10px] text-yellow-700">
                           Skipped
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-300 text-xs leading-relaxed mb-2 line-clamp-2">
+                    <p className="text-gray-700 text-xs leading-relaxed mb-2 line-clamp-2">
                       {q.stem}
                     </p>
                     {!isCorrect && (
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        <span className="font-medium text-slate-300">
+                      <p className="text-xs text-gray-600 leading-relaxed">
+                        <span className="font-medium text-gray-700">
                           Explanation:{" "}
                         </span>
                         {q.explanation}
@@ -244,7 +244,7 @@ export default function ExamResultsPage() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/exam"
-            className="flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800"
+            className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
             <RefreshCw className="h-4 w-4" /> Retake Exam
           </Link>

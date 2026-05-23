@@ -59,20 +59,23 @@ export function LessonClient({
 
   const steps = ["concept", "quiz", ...(hasExercise ? ["exercise"] : [])];
 
+  // Suppress unused variable warning
+  void prevLo;
+
   return (
     <div className="flex flex-col gap-6">
       {/* Step indicator */}
       {step !== "complete" && (
-        <div className="flex items-center gap-2 text-xs text-slate-500">
+        <div className="flex items-center gap-2 text-xs text-gray-500">
           {steps.map((s, i) => (
             <div key={s} className="flex items-center gap-2">
-              {i > 0 && <span className="text-slate-700">→</span>}
+              {i > 0 && <span className="text-gray-300">→</span>}
               <span
                 className={cn(
                   "rounded px-2 py-0.5 font-medium",
                   step === s
-                    ? "bg-blue-500/20 text-blue-400"
-                    : "text-slate-600"
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-400"
                 )}
               >
                 {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -117,14 +120,14 @@ export function LessonClient({
 
       {/* Complete */}
       {step === "complete" && (
-        <div className="rounded-xl border border-green-500/30 bg-green-500/5 p-6">
+        <div className="rounded-xl border border-green-200 bg-green-50 p-6">
           <div className="flex items-center gap-3 mb-4">
-            <CheckCircle2 className="h-6 w-6 text-green-400" />
+            <CheckCircle2 className="h-6 w-6 text-green-600" />
             <div>
-              <h3 className="font-semibold text-green-300">
+              <h3 className="font-semibold text-green-700">
                 Lesson Complete!
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-gray-500">
                 {quizCorrect === true
                   ? "Quiz answered correctly"
                   : quizCorrect === false
@@ -161,7 +164,7 @@ export function LessonClient({
             )}
             <Link
               href={`/chapter/${chapterId}`}
-              className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors"
+              className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
             >
               Back to Chapter
             </Link>

@@ -28,11 +28,11 @@ export function WorkflowSequencer({ data, onComplete }: Props) {
   const check = () => setChecked(true);
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">
         Workflow Sequencer
       </h3>
-      <p className="text-sm text-slate-400 mb-4">
+      <p className="text-sm text-gray-600 mb-4">
         Drag the stages into the correct order.
       </p>
 
@@ -45,12 +45,12 @@ export function WorkflowSequencer({ data, onComplete }: Props) {
               key={stage}
               className={cn(
                 "flex items-center gap-3 rounded-lg border px-4 py-3 text-sm",
-                correct_ && "border-green-500/40 bg-green-500/10 text-green-300",
-                wrong_ && "border-red-500/40 bg-red-500/10 text-red-300",
-                !checked && "border-slate-700 text-slate-300"
+                correct_ && "border-green-200 bg-green-50 text-green-700",
+                wrong_ && "border-red-200 bg-red-50 text-red-700",
+                !checked && "border-gray-200 text-gray-700"
               )}
             >
-              <span className="w-5 text-slate-600 font-mono text-xs">
+              <span className="w-5 text-gray-400 font-mono text-xs">
                 {idx + 1}.
               </span>
               <span className="flex-1">{stage}</span>
@@ -59,21 +59,21 @@ export function WorkflowSequencer({ data, onComplete }: Props) {
                   <button
                     onClick={() => move(idx, -1)}
                     disabled={idx === 0}
-                    className="rounded p-1 text-slate-500 hover:text-slate-300 disabled:opacity-30"
+                    className="rounded p-1 text-gray-400 hover:text-gray-700 disabled:opacity-30"
                   >
                     <ArrowUp className="h-3.5 w-3.5" />
                   </button>
                   <button
                     onClick={() => move(idx, 1)}
                     disabled={idx === items.length - 1}
-                    className="rounded p-1 text-slate-500 hover:text-slate-300 disabled:opacity-30"
+                    className="rounded p-1 text-gray-400 hover:text-gray-700 disabled:opacity-30"
                   >
                     <ArrowDown className="h-3.5 w-3.5" />
                   </button>
                 </div>
               )}
               {correct_ && (
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-green-400" />
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-green-600" />
               )}
             </li>
           );
@@ -100,7 +100,7 @@ export function WorkflowSequencer({ data, onComplete }: Props) {
         {checked && !isCorrect && (
           <button
             onClick={() => setChecked(false)}
-            className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors"
+            className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
             Try Again
           </button>

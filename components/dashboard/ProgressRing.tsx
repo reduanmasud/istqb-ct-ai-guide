@@ -11,7 +11,7 @@ export function ProgressRing({
   pct,
   size = 80,
   label,
-  color = "#3b82f6",
+  color = "#2563eb",
 }: Props) {
   const r = (size - 12) / 2;
   const circ = 2 * Math.PI * r;
@@ -30,7 +30,7 @@ export function ProgressRing({
             cy={size / 2}
             r={r}
             fill="none"
-            stroke="#1e293b"
+            stroke="#e2e8f0"
             strokeWidth={9}
           />
           <circle
@@ -46,11 +46,11 @@ export function ProgressRing({
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-lg font-bold text-slate-100">{pct}%</span>
+          <span className="text-lg font-bold text-gray-900">{pct}%</span>
         </div>
       </div>
       {label && (
-        <span className="text-xs text-slate-400 text-center">{label}</span>
+        <span className="text-xs text-gray-500 text-center">{label}</span>
       )}
     </div>
   );

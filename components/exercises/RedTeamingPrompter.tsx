@@ -33,8 +33,8 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
 
   if (done) {
     return (
-      <div className="rounded-xl border border-green-500/30 bg-green-500/5 p-6">
-        <p className="text-sm text-green-300 font-medium mb-3">
+      <div className="rounded-xl border border-green-200 bg-green-50 p-6">
+        <p className="text-sm text-green-700 font-medium mb-3">
           Red-teaming exercise complete!
         </p>
         <button
@@ -48,36 +48,36 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
   }
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
           Red-Teaming Exercise
         </h3>
-        <span className="text-xs text-slate-500">
+        <span className="text-xs text-gray-500">
           {current + 1} / {scenarios.length}
         </span>
       </div>
 
-      <div className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-4 mb-4">
-        <div className="text-xs font-semibold text-orange-400 uppercase tracking-wide mb-1">
+      <div className="rounded-lg border border-orange-300 bg-orange-50 p-4 mb-4">
+        <div className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-1">
           Prompt
         </div>
-        <p className="text-sm text-slate-200 leading-relaxed">{scenario.prompt}</p>
+        <p className="text-sm text-gray-800 leading-relaxed">{scenario.prompt}</p>
       </div>
 
       {revealed && (
         <div className="space-y-3 mb-4">
-          <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
-            <div className="text-xs font-semibold text-red-400 uppercase tracking-wide mb-1">
+          <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+            <div className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-1">
               Risk
             </div>
-            <p className="text-sm text-slate-300">{scenario.risk}</p>
+            <p className="text-sm text-gray-700">{scenario.risk}</p>
           </div>
-          <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-3">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide mr-2">
+          <div className="rounded-lg border border-gray-200 bg-gray-100 p-3">
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide mr-2">
               Category:
             </span>
-            <span className="text-xs text-blue-300">{scenario.category}</span>
+            <span className="text-xs text-blue-600">{scenario.category}</span>
           </div>
         </div>
       )}
@@ -86,7 +86,7 @@ export function RedTeamingPrompter({ data, onComplete }: Props) {
         {!revealed && (
           <button
             onClick={() => setRevealed(true)}
-            className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors"
+            className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
             Reveal Risk
           </button>
