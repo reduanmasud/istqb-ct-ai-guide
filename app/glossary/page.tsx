@@ -1,0 +1,134 @@
+"use client";
+import { useState, useMemo } from "react";
+import { Header } from "@/components/layout/Header";
+import glossaryData from "@/content/glossary.json";
+import chaptersData from "@/content/chapters.json";
+import type { GlossaryTerm, ChapterMeta } from "@/lib/types";
+import { cn } from "@/lib/cn";
+import { Search, X } from "lucide-react";
+import Link from "next/link";
+
+const glossary = glossaryData as GlossaryTerm[];
+const chapters = chaptersData as ChapterMeta[];
+
+const CHAPTER_COLORS: Record<number, string> = {
+  1: "bg-blue-500/20 text-blue-300",
+  2: "bg-purple-500/20 text-purple-300",
+  3: "bg-green-500/20 text-green-300",
+  4: "bg-orange-500/20 text-orange-300",
+  5: "bg-yellow-500/20 text-yellow-300",
+  6: "bg-red-500/20 text-red-300",
+  7: "bg-teal-500/20 text-teal-300",
+};
+
+export default function GlossaryPage() {
+  const [search, setSearch] = useState("");
+  const [filterChapter, setFilterChapter] = useState<number | null>(null);
+
+  const filtered = useMemo(() => {
+    let terms = glossary;
+    if (filterChapter !== null) terms = terms.filter((t) => t.chapter === filterChapter);
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      terms = terms.filter(
+        (t) => t.term.toLowerCase().includes(q) || t.definition.toLowerCase().includes(q)
+      );
+    }
+    return terms.sort((a, b) => a.term.localeCompare(b.term));
+  }, [search, filterChapter]);
+
+  // Group by first letter
+  const grouped = useMemo(() => {
+    const map: Record<string, GlossaryTerm[]> = {};
+    filtered.forEach((t) => {
+      const letter = t.term[0].toUpperCase();
+      if (!map[letter]) map[letter] = [];
+      map[letter].push(t);
+    });
+    return map;
+  }, [filtered]);
+
+  const letters = Object.keys(grouped).sort();
+
+  return (
+    <>
+      <Header />
+      <main className="mx-auto max-w-4xl px-4 py-8">
+        <h1 className="text-2xl font-bold text-slate-100 mb-1">Glossary</h1>
+        <p className="text-slate-400 text-sm mb-6">{glossary.length} AI-specific terms from the official CT-AI v2.0 syllabus</p>
+
+        {/* Search + filter */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search terms or definitions…"
+              className="w-full rounded-lg border border-slate-700 bg-slate-900 py-2 pl-9 pr-4 text-sm text-slate-200 placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+            />
+            {search && (
+              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              onClick={() => setFilterChapter(null)}
+              className={cn("rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+                filterChapter === null ? "bg-slate-700 text-slate-100" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+              )}
+            >All</button>
+            {chapters.map((ch) => (
+              <button key={ch.id}
+                onClick={() => setFilterChapter(filterChapter === ch.id ? null : ch.id)}
+                className={cn("rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+                  filterChapter === ch.id
+                    ? cn(CHAPTER_COLORS[ch.id], "ring-1 ring-current")
+                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+                )}
+              >Ch {ch.id}</button>
+            ))}
+          </div>
+        </div>
+
+        {filtered.length === 0 && (
+          <p className="text-center text-slate-500 py-12">No terms match your search.</p>
+        )}
+
+        {/* Alphabetical groups */}
+        <div className="flex flex-col gap-8">
+          {letters.map((letter) => (
+            <section key={letter} id={`letter-${letter}`}>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3 pb-2 border-b border-slate-800">
+                {letter}
+              </h2>
+              <div className="flex flex-col gap-3">
+                {grouped[letter].map((term) => (
+                  <div key={term.term} className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+                    <div className="flex items-start justify-between gap-4 mb-1.5">
+                      <h3 className="font-semibold text-slate-100 text-sm">{term.term}</h3>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className={cn("rounded px-2 py-0.5 text-[10px] font-medium", CHAPTER_COLORS[term.chapter] ?? "bg-slate-700 text-slate-300")}>
+                          Ch {term.chapter}
+                        </span>
+                        {term.relatedLo && (
+                          <Link href={`/chapter/${term.chapter}/lesson/${term.relatedLo}`}
+                            className="text-[10px] font-mono text-blue-400 hover:underline">
+                            {term.relatedLo.toUpperCase()}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-sm text-slate-400 leading-relaxed">{term.definition}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </main>
+    </>
+  );
+}
