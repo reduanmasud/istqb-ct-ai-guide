@@ -1,0 +1,14 @@
+import { ExamResultsClient } from "@/components/exam/ExamResultsClient";
+
+export function generateStaticParams() {
+  return [{ set: "a" }, { set: "b" }];
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ set: string }>;
+}) {
+  const { set } = await params;
+  return <ExamResultsClient set={set} />;
+}

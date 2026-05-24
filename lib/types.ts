@@ -71,6 +71,16 @@ export interface ExamQuestion {
   explanation: string;
 }
 
+export type ExamSet = "a" | "b";
+
+export interface ExamSetResult {
+  set: ExamSet;
+  score: number;
+  total: number;
+  passed: boolean;
+  completedAt: string;
+}
+
 // ── Progress types ────────────────────────────────────────────────────────────
 
 export interface ExamAttempt {
@@ -79,6 +89,7 @@ export interface ExamAttempt {
   maxScore: number;
   answers: Record<number, number | number[]>;
   timeSpent: number; // seconds
+  set?: ExamSet;
 }
 
 export interface Progress {
@@ -86,5 +97,6 @@ export interface Progress {
   quizAnswers: Record<string, number | number[]>; // loId → answer
   quizCorrect: Record<string, boolean>; // loId → correct?
   examAttempts: ExamAttempt[];
+  examSetResults: Partial<Record<ExamSet, ExamSetResult>>;
   lastVisited: string;
 }

@@ -1,4 +1,5 @@
-import type { Progress, ExamAttempt } from "./types";
+import type { Progress, ExamAttempt, ExamSet, ExamSetResult } from "./types";
+import { CT_AI_PASS_THRESHOLD_PCT } from "./config";
 
 const STORAGE_KEY = "ctai_progress";
 
@@ -7,6 +8,7 @@ const defaultProgress = (): Progress => ({
   quizAnswers: {},
   quizCorrect: {},
   examAttempts: [],
+  examSetResults: {},
   lastVisited: "/",
 });
 
@@ -49,6 +51,44 @@ export function recordExamAttempt(attempt: ExamAttempt): void {
   const p = loadProgress();
   p.examAttempts = [...p.examAttempts, attempt];
   saveProgress(p);
+}
+
+export function saveExamSetResult(result: ExamSetResult): void {
+  const p = loadProgress();
+  p.examSetResults = { ...p.examSetResults, [result.set]: result };
+  saveProgress(p);
+}
+
+export function getExamSetResult(set: ExamSet): ExamSetResult | null {
+  const p = loadProgress();
+  return p.examSetResults[set] ?? null;
+}
+
+export function getAllExamSetResults(): Record<ExamSet, ExamSetResult | null> {
+  const p = loadProgress();
+  return {
+    a: p.examSetResults.a ?? null,
+    b: p.examSetResults.b ?? null,
+  };
+}
+
+export function bestExamSetScore(): {
+  pct: number;
+  passed: boolean;
+  set: ExamSet | null;
+} {
+  const results = Object.values(loadProgress().examSetResults).filter(
+    (r): r is ExamSetResult => Boolean(r)
+  );
+  if (results.length === 0) return { pct: 0, passed: false, set: null };
+  const best = results.reduce((acc, r) =>
+    r.score / r.total > acc.score / acc.total ? r : acc
+  );
+  return {
+    pct: Math.round((best.score / best.total) * 100),
+    passed: best.score / best.total >= CT_AI_PASS_THRESHOLD_PCT,
+    set: best.set,
+  };
 }
 
 export function setLastVisited(route: string): void {
