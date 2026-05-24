@@ -7,6 +7,7 @@ import chaptersData from "@/content/chapters.json";
 import type { ExamAttempt, ExamQuestion, ChapterMeta } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import Link from "next/link";
+import { Markdown } from "@/components/Markdown";
 import {
   Trophy,
   XCircle,
@@ -212,14 +213,14 @@ export default function ExamResultsPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-700 text-xs leading-relaxed mb-2 line-clamp-2">
-                      {q.stem}
-                    </p>
+                    <div className="text-slate-700 text-xs leading-relaxed mb-2 line-clamp-2">
+                      <Markdown variant="inline">{q.stem}</Markdown>
+                    </div>
                     {!isCorrect && (
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        <span className="font-semibold text-slate-700">Explanation: </span>
-                        {q.explanation}
-                      </p>
+                      <div className="text-xs text-slate-600 leading-relaxed">
+                        <span className="font-semibold text-slate-700 block mb-0.5">Explanation</span>
+                        <Markdown>{q.explanation}</Markdown>
+                      </div>
                     )}
                   </div>
                 </div>

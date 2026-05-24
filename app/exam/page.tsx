@@ -7,6 +7,7 @@ import type { ExamQuestion } from "@/lib/types";
 import { useExam } from "@/hooks/useExam";
 import { cn } from "@/lib/cn";
 import { Clock, AlertCircle, Send } from "lucide-react";
+import { Markdown } from "@/components/Markdown";
 
 const questions = questionsData as ExamQuestion[];
 
@@ -131,7 +132,9 @@ export default function ExamPage() {
             )}
           </div>
 
-          <p className="text-slate-800 leading-relaxed mb-5">{q.stem}</p>
+          <div className="text-slate-800 leading-relaxed mb-5">
+            <Markdown variant="inline">{q.stem}</Markdown>
+          </div>
 
           <div className="flex flex-col gap-2">
             {q.options.map((opt, idx) => {
@@ -160,7 +163,9 @@ export default function ExamPage() {
                   >
                     {String.fromCharCode(65 + idx)}
                   </span>
-                  <span className="leading-relaxed">{opt}</span>
+                  <span className="leading-relaxed">
+                    <Markdown variant="inline">{opt}</Markdown>
+                  </span>
                 </button>
               );
             })}
@@ -168,8 +173,8 @@ export default function ExamPage() {
 
           {submitted && (
             <div className="mt-4 rounded-lg p-3 text-xs bg-blue-50 border border-blue-200 text-slate-700">
-              <span className="font-bold text-blue-700">Explanation: </span>
-              {q.explanation}
+              <span className="font-bold text-blue-700 block mb-1">Explanation</span>
+              <Markdown>{q.explanation}</Markdown>
             </div>
           )}
         </div>
